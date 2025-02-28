@@ -1,5 +1,5 @@
 # IITM BS DEGREE CGPA Calculator V2
-An intuitive web application designed to calculate the CGPA for the IITM BS Degree program. Users can select completed courses, input grades, and compute level wise CGPA based on predefined course credits, ensuring accurate and efficient grade tracking with a clean UI. 🚀
+An intuitive web application designed to calculate the CGPA for the IITM BS Degree program. Users can select the grades of completed courses, and compute level wise CGPA based on predefined course credits, ensuring accurate and efficient grade tracking with a clean UI. 🚀
 
 ## 💻 Built with
 
