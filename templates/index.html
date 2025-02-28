@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IITM BS Degree CGPA Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Header Section -->
+    <div class="bg-red-700 p-5 text-white">
+        <div class="max-w-6xl mx-auto flex items-center flex-wrap">
+            <img src="/static/iitm_logo.png" alt="IITM Logo" class="h-12 mr-4">
+            <h1 class="text-xl font-bold">Indian Institute of Technology Madras</h1>
+        </div>
+    </div>
+    <h1 class="text-2xl font-bold text-center text-gray-800 mt-6 mb-6">IITM BS Degree CGPA Calculator</h1>
+    <div class="bg-white p-6 shadow-lg rounded mb-5 mx-4 sm:mx-10 md:mx-20 lg:mx-40">
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Easily Calculate Your CGPA with Just a Few Clicks!</h1>
+        <h2 class="text-xl font-semibold text-center text-gray-800 mb-6">
+            1. Choose your grades from the dropdown <br>
+            2. Once recheck for all the inputs properly <br>
+            3. Just click on 'Calculate CGPA' button 
+        </h2>
+    </div>
+    {% if foundation_cgpa not in [None, '', 0] or diploma_prog_cgpa not in [None, '', 0] or diploma_data_cgpa not in [None, '', 0] or result not in [None, '', 0] %}
+        <div class="flex flex-wrap justify-center items-center mt-6">
+            {% if foundation_cgpa %}
+                <div class="text-center bg-yellow-100 p-4 rounded shadow mx-2 my-2 w-full sm:w-auto">
+                    <h2 class="text-lg font-bold text-yellow-800">Foundation CGPA: {{ foundation_cgpa }}</h2>
+                </div>
+            {% endif %}
+            {% if diploma_prog_cgpa %}
+                <div class="text-center bg-yellow-100 p-4 rounded shadow mx-2 my-2 w-full sm:w-auto">
+                    <h2 class="text-lg font-bold text-yellow-800">Diploma in Programming CGPA: {{ diploma_prog_cgpa }}</h2>
+                </div>
+            {% endif %}
+            {% if diploma_data_cgpa %}
+                <div class="text-center bg-yellow-100 p-4 rounded shadow mx-2 my-2 w-full sm:w-auto">
+                    <h2 class="text-lg font-bold text-yellow-800">Diploma in Data Science CGPA: {{ diploma_data_cgpa }}</h2>
+                </div>
+            {% endif %}
+            {% if result %}
+                <div class="text-center bg-yellow-100 p-4 rounded shadow mx-2 my-2 w-full sm:w-auto">
+                    <h2 class="text-lg font-bold text-yellow-800">Overall CGPA: {{ result }}</h2>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <!-- Page Split into Two Halves -->
+    <div class="max-w-7xl mx-auto mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6 px-4 sm:px-10">
+        <!-- Left Section: CGPA Calculator -->
+        <div class="bg-white p-6 shadow-lg rounded">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="mb-4">
+                {% for category, message in messages %}
+                <div class="p-2 rounded mb-2 {% if category == 'success' %} bg-green-100 text-green-700 {% elif category == 'info' %} bg-blue-100 text-blue-700 {% elif category == 'error' %} bg-red-100 text-red-700 {% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <form action="/calculate" method="POST">
+                <div class="mb-6 overflow-y-auto max-h-96">
+                    <h2 class="text-xl font-bold text-red-800 border-b-2 border-red-600 mb-4">Foundation</h2>
+                    {% for subject in subjects %}
+                        {% if subject.category == "Foundation" %}
+                        <div class="flex flex-wrap items-center mb-3">
+                            <label class="flex-1 text-gray-700">{{ subject.name }} ({{ subject.credits }} credits)</label>
+                            <select name="grade_{{ subject.name }}" class="p-2 border rounded focus:outline-red-700">
+                                <option value="">Select Grade</option>
+                                <option value="S">S</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                            </select>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+
+
+                    <h2 class="text-xl font-bold text-red-800 border-b-2 border-red-600 mb-4">Diploma in Programming</h2>
+                    {% for subject in subjects %}
+                        {% if subject.category == "Diploma in Prog" %}
+                        <div class="flex flex-wrap items-center mb-3">
+                            <label class="flex-1 text-gray-700">{{ subject.name }} ({{ subject.credits }} credits)</label>
+                            <select name="grade_{{ subject.name }}" class="p-2 border rounded focus:outline-red-700">
+                                <option value="">Select Grade</option>
+                                <option value="S">S</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                            </select>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+
+
+                    <h2 class="text-xl font-bold text-red-800 border-b-2 border-red-600 mb-4">Diploma in Data Science</h2>
+                    {% for subject in subjects %}
+                        {% if subject.category == "Diploma in Data" %}
+                        <div class="flex flex-wrap items-center mb-3">
+                            <label class="flex-1 text-gray-700">{{ subject.name }} ({{ subject.credits }} credits)</label>
+                            <select name="grade_{{ subject.name }}" class="p-2 border rounded focus:outline-red-700">
+                                <option value="">Select Grade</option>
+                                <option value="S">S</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                            </select>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="w-full bg-red-700 text-white py-2 rounded hover:bg-red-500 transition">
+                    Calculate CGPA
+                </button>
+            </form>
+        </div>
+
+        <!-- Right Section: Additional Information -->
+        <div class="bg-white p-6 shadow-lg rounded">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">CGPA Grading Scale</h2>
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-red-700 text-white">
+                        <th class="p-2">Grade</th>
+                        <th class="p-2">Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b">
+                        <td class="p-2">S</td>
+                        <td class="p-2">10</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="p-2">A</td>
+                        <td class="p-2">9</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="p-2">B</td>
+                        <td class="p-2">8</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="p-2">C</td>
+                        <td class="p-2">7</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="p-2">D</td>
+                        <td class="p-2">6</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="p-2">E</td>
+                        <td class="p-2">5</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2 class="text-2xl font-bold text-gray-800 mt-6 mb-4">How CGPA is Calculated?</h2>
+            <p class="text-gray-700">
+                CGPA is calculated using the formula:  
+                <span class="font-bold">CGPA = (Σ (Credits × Grade Points)) / Σ (Total Credits)</span>
+            </p>
+
+            <h2 class="text-2xl font-bold text-gray-800 mt-6 mb-4">Tips for Better CGPA</h2>
+            <ul class="list-disc ml-5 text-gray-700">
+                <li>Focus on high-credit subjects.</li>
+                <li>Improve consistency in all subjects.</li>
+                <li>Understand concepts instead of memorizing.</li>
+                <li>Seek guidance from professors and peers.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="bg-red-700 p-5 text-white text-center text-md mt-10">
+        <h1>For BSc and BS level courses, under development process.<br>&copy IIT Madras. All rights reserved.</h1>
+    </div>  
+</body>
+</html>
