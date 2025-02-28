@@ -1,5 +1,5 @@
-# IITM BS DEGREE CGPA Calculator
-An intuitive web application designed to calculate the CGPA for the IITM BS Degree program. Users can select completed courses, input grades, and compute CGPA based on predefined course credits, ensuring accurate and efficient grade tracking with a clean UI. 🚀
+# IITM BS DEGREE CGPA Calculator V2
+An intuitive web application designed to calculate the CGPA for the IITM BS Degree program. Users can select completed courses, input grades, and compute level wise CGPA based on predefined course credits, ensuring accurate and efficient grade tracking with a clean UI. 🚀
 
 ## 💻 Built with
 
@@ -13,9 +13,13 @@ An intuitive web application designed to calculate the CGPA for the IITM BS Degr
 - **CSS**: Styles web pages.
 - **Tailwind CSS**: For responsive and mobile-first design.
 
+- ### Library
+- **Pandas**: For analysing courses from loaded Excel Sheet.
+
 ## 📸 Screenshots
-![home-1](https://github.com/user-attachments/assets/84fb8860-4bde-4cf6-ae49-4b8b5f0eb19f)
-![home-2](https://github.com/user-attachments/assets/72d3b65c-37f5-40de-b66b-6c4fb6040e23)
+![home-1](https://github.com/user-attachments/assets/61b06018-1865-4231-bb29-198f11ca83c6)
+![home-2](https://github.com/user-attachments/assets/2ef3cdf2-c78d-487d-ad40-d6a47c084bdd)
+![home-3](https://github.com/user-attachments/assets/ffe236a3-1902-49d9-86c0-675706fa2fbb)
 
 <hr>
 <h3 align="center">
