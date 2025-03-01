@@ -205,6 +205,10 @@ def load_subjects():
 # Load subjects at app start
 SUBJECTS = load_subjects()
 
+@app.route("/health")
+def health():
+    return "OK", 200
+
 @app.route("/")
 def index():
     subjects = load_subjects()  # Load latest data from Excel
